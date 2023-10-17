@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.getUsers();
   }
 
   registerToggle(){
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUsers(){
-    this.http.get('http://localhost:5001/api/users').subscribe({
+    this.http.get('http://localhost:5095/api/users').subscribe({
       next: response => this.users = response,
       error: error => console.log(error),
       complete: () => console.log('completed')
