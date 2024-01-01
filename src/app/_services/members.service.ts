@@ -131,6 +131,21 @@ export class MembersService {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/', {}); // posto je post metoda ide empty object na kraju
+  }
+
+  getLikes(predicate: string, pageNumber: number, pageSize: number) {
+
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+
+    //return this.http.get<Member[]>(this.baseUrl + 'likes?predicate'+predicate); // ovde nece one userparams da dodaje pa da generise query string nego zahardkodiran
+    return this.getPaginatedResult<Member[]>(this.baseUrl+'likes', params);
+  
+  }
+
+
   private getPaginationHeaders(pageNumber: number, pageSize: number) {
     let params = new HttpParams
     params = params.append('pageNumber', pageNumber);
